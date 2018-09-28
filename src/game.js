@@ -7,6 +7,8 @@ let game = new Phaser.Game(800, 600, Phaser.CANVAS, 'Arrow', { preload: preload,
 // Création des outils de jeu
 let flechette;
 let cible;
+let circle25;
+let circle50;
 // Création hitbox
 let graphics;
 let poly;
@@ -29,6 +31,9 @@ function preload() {
 
 // Création des éléments
 function create() {
+
+    // P2 Physics
+    game.physics.startSystem(Phaser.Physics.P2JS);
 
 
 
@@ -55,8 +60,6 @@ function create() {
     flechette.events.onDragStart.add(startDrag, this);
     flechette.events.onDragStop.add(stopDrag, this);
 
-    // Hitbox
-    generator();
 
     //Text
     score = game.add.text(500, 200, total, { font: "65px Arial", fill: "#ff0044", align: "center" });
@@ -98,18 +101,16 @@ function update() {
 
 function collisionHandler (obj1, obj2) {
 
-    // game.physics.arcade.overlap(flechette, circle25, total += 25, null, this);
-    // game.physics.arcade.overlap(flechette, circle50, total += 50, null, this);
-    // game.physics.arcade.overlap(flechette, poly, total += 20, null, this);
-
     console.log("Touché");
+
+    // Hitbox
+    generator();
 
 }
 
 // Rendu pour les Dévs
 function render() {
     game.debug.body(flechette);
-    // game.debug.body(cible);
     game.debug.geom(circle25,'#29a329');
     game.debug.geom(circle50,'#ff0000');
 }

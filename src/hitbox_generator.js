@@ -1,3 +1,5 @@
+let a = 0;
+
 function generator() {
 
     // Affiche les valeurs et leur index
@@ -28,13 +30,31 @@ function generator() {
         graphics.drawPolygon(poly.points);
         graphics.endFill();
 
+        detector(a);
+
         console.log("c", i, y);
 
+        a++;
         i++;
         
     }
 
     circle25 = new Phaser.Circle(255, 230,24);
     circle50 = new Phaser.Circle(255, 230,14);
+
+}
+
+function detector(i) {
+
+    console.log(i, values[i]);
+    game.physics.arcade.overlap(flechette, graphics, alo, null, this);
+    game.physics.arcade.overlap(flechette, circle50, alo, null, this);
+    game.physics.arcade.overlap(flechette, circle25, alo, null, this);
+
+}
+
+function alo() {
+
+    console.log('yolo');
 
 }
