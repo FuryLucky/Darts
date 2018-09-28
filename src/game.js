@@ -62,7 +62,7 @@ function create() {
 
 
     //Text
-    score = game.add.text(500, 200, total, { font: "65px Arial", fill: "#ff0044", align: "center" });
+    // score = game.add.text(500, 200, total, { font: "65px Arial", fill: "#ff0044", align: "center" });
 
 }
 
@@ -96,7 +96,7 @@ function lancer() {
 
 // Mise à jour des éléments...
 function update() {
-    score.text = total;
+    // score.text = total;
 }
 
 function collisionHandler (obj1, obj2) {
