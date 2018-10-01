@@ -32,11 +32,6 @@ function preload() {
 // Création des éléments
 function create() {
 
-    // P2 Physics
-    game.physics.startSystem(Phaser.Physics.P2JS);
-
-
-
     // Ajout des sprites et redimensionnement
     cible = game.add.sprite(75, 50, 'target');
     cible.scale.setTo(0.15, 0.15);
@@ -49,7 +44,7 @@ function create() {
     game.physics.enable([flechette, cible], Phaser.Physics.ARCADE);
 
     // Définition des HitBox
-    flechette.body.setSize(150, 150, -2500, -900);
+    flechette.body.setSize(100, 100, -2500, -900);
     cible.body.setCircle(1200);
 
     // Rend le Drag possible
@@ -60,9 +55,9 @@ function create() {
     flechette.events.onDragStart.add(startDrag, this);
     flechette.events.onDragStop.add(stopDrag, this);
 
-
-    //Text
-    // score = game.add.text(500, 200, total, { font: "65px Arial", fill: "#ff0044", align: "center" });
+    //Score
+    score = game.add.text(600, 200, total, { font: "65px Arial", fill: "#ff0044", align: "center" });
+    score.anchor.setTo(0.5, 0.5);
 
 }
 
@@ -96,7 +91,7 @@ function lancer() {
 
 // Mise à jour des éléments...
 function update() {
-    // score.text = total;
+    
 }
 
 function collisionHandler (obj1, obj2) {
@@ -110,7 +105,7 @@ function collisionHandler (obj1, obj2) {
 
 // Rendu pour les Dévs
 function render() {
-    game.debug.body(flechette);
-    game.debug.geom(circle25,'#29a329');
-    game.debug.geom(circle50,'#ff0000');
+    // game.debug.body(flechette);
+    // game.debug.geom(circle25,'#29a329');
+    // game.debug.geom(circle50,'#ff0000');
 }

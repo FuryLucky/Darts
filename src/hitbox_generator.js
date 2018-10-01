@@ -42,19 +42,30 @@ function generator() {
     circle25 = new Phaser.Circle(255, 230,24);
     circle50 = new Phaser.Circle(255, 230,14);
 
+    if (circle50.contains(flechette.body.x, flechette.body.y)){
+        console.log('50');
+        total = 50;
+        score.text = total;
+    }
+    else if (circle25.contains(flechette.body.x, flechette.body.y)){
+        console.log('25');
+        total = 25;
+        score.text = total;
+    }
+    
+
 }
 
 function detector(i) {
 
     console.log(i, values[i]);
-    game.physics.arcade.overlap(flechette, graphics, alo, null, this);
-    game.physics.arcade.overlap(flechette, circle50, alo, null, this);
-    game.physics.arcade.overlap(flechette, circle25, alo, null, this);
 
-}
+    if (poly.contains(flechette.body.x, flechette.body.y))
+    {
+        total += values[i];
+        score.text = total;
+    }
 
-function alo() {
-
-    console.log('yolo');
+    graphics.clear();
 
 }
