@@ -2,7 +2,7 @@
 // ...Dimensions du Canvas
 // ... ...Nom du niveau
 // ... ... ...Function de bases
-let game = new Phaser.Game(800, 600, Phaser.CANVAS, 'Arrow', { preload: preload, create: create, update: update, render: render });
+let game = new Phaser.Game(800, 600, Phaser.CANVAS, 'Arrow', { preload: preload, create: create});
 
 // Création des outils de jeu
 let flechette;
@@ -21,10 +21,11 @@ let point_c = [255, 220, 261, 219, 264, 218, 267, 224, 268, 226, 268, 232, 268, 
 let point_d = [255, 220, 256, 217, 261, 220, 262, 222, 264, 226, 266, 227, 264, 232, 266, 233, 264, 238, 261, 240, 256, 242, 254, 242, 249, 239, 246, 239, 245, 233, 243, 232, 243, 226, 245, 225, 248, 220, 249, 219];
 // Score
 let score;
-let total = 0;
+let total = [];
 
 // Chargement des images
 function preload() {
+    game.load.image('background', '../assets/wood.jpeg');
     game.load.image('target', '../assets/target.png');
     game.load.image('darts', '../assets/darts.png');
 }
@@ -32,13 +33,14 @@ function preload() {
 // Création des éléments
 function create() {
 
+    //background
+    game.add.sprite(0, 0, 'background').scale.setTo(0.32, 0.4);
+
     // Ajout des sprites et redimensionnement
     cible = game.add.sprite(75, 50, 'target');
     cible.scale.setTo(0.15, 0.15);
 
-    flechette = game.add.sprite(700, 300, 'darts');
-    flechette.scale.setTo(0.03, 0.03);
-    flechette.angle = 90;
+    flechette = game.add.sprite(200, 450, 'darts');
 
     // Ajout de la physique aux éléments
     game.physics.enable([flechette, cible], Phaser.Physics.ARCADE);
@@ -47,17 +49,28 @@ function create() {
     flechette.body.setSize(100, 100, -2500, -900);
     cible.body.setCircle(1200);
 
-    // Rend le Drag possible
-    flechette.inputEnabled = true;
-    flechette.input.enableDrag();
+    dragInit();
 
     // Function a executer au Drag et quand on relâche
     flechette.events.onDragStart.add(startDrag, this);
     flechette.events.onDragStop.add(stopDrag, this);
 
     //Score
-    score = game.add.text(600, 200, total, { font: "65px Arial", fill: "#ff0044", align: "center" });
+    let style = { font: 'bold 40pt Arial', fill: 'white'}; //, align: 'left', wordWrap: true, wordWrapWidth: 10 
+    score = game.add.text(600, 100, total, style);
     score.anchor.setTo(0.5, 0.5);
+
+}
+
+function dragInit() {
+
+    //Repositionnement 
+    flechette.scale.setTo(0.03, 0.03);
+    flechette.angle = 90;
+
+    // Rend le Drag possible
+    flechette.inputEnabled = true;
+    flechette.input.enableDrag();
 
 }
 
@@ -78,34 +91,13 @@ function stopDrag() {
     flechette.inputEnabled = false;
 
     setTimeout(function() {
-        lancer();
+        launch();
     }, 100);
 
 }
 
-function lancer() {
+function launch() {
 
-    game.physics.arcade.overlap(flechette, cible, collisionHandler, null, this);
-
-}
-
-// Mise à jour des éléments...
-function update() {
-    
-}
-
-function collisionHandler (obj1, obj2) {
-
-    console.log("Touché");
-
-    // Hitbox
     generator();
 
-}
-
-// Rendu pour les Dévs
-function render() {
-    // game.debug.body(flechette);
-    // game.debug.geom(circle25,'#29a329');
-    // game.debug.geom(circle50,'#ff0000');
 }

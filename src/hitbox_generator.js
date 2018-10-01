@@ -32,8 +32,6 @@ function generator() {
 
         detector(a);
 
-        console.log("c", i, y);
-
         a++;
         i++;
         
@@ -43,13 +41,11 @@ function generator() {
     circle50 = new Phaser.Circle(255, 230,14);
 
     if (circle50.contains(flechette.body.x, flechette.body.y)){
-        console.log('50');
-        total = 50;
+        total.push(50);
         score.text = total;
     }
     else if (circle25.contains(flechette.body.x, flechette.body.y)){
-        console.log('25');
-        total = 25;
+        total.push(25);
         score.text = total;
     }
     
@@ -58,14 +54,38 @@ function generator() {
 
 function detector(i) {
 
-    console.log(i, values[i]);
-
     if (poly.contains(flechette.body.x, flechette.body.y))
     {
-        total += values[i];
+        total.push(values[i]);
         score.text = total;
     }
 
     graphics.clear();
+
+    setTimeout(function() {
+        if (total.length < 5) {
+            refresh();
+        }else{
+           restart(); 
+        }     
+    }, 1000);
+}
+
+// Pour relancer la flechette
+function refresh() {
+
+    flechette.x = 200;
+    flechette.y = 450;
+
+    dragInit();
+
+    a = 0;
+}
+
+//Fin
+function restart() {
+
+    let max = total.reduce(function(a, b) { return a + b; }, 0);
+    score.text = max;
 
 }
