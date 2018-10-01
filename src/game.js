@@ -2,11 +2,15 @@
 // ...Dimensions du Canvas
 // ... ...Nom du niveau
 // ... ... ...Function de bases
-let game = new Phaser.Game(800, 600, Phaser.CANVAS, 'Arrow', { preload: preload, create: create});
+let game = new Phaser.Game(800, 600, Phaser.CANVAS, 'Arrow', { preload: preload, create: create, update: update});
 
 // Création des outils de jeu
 let flechette;
 let cible;
+let circle_2;
+let circle_high;
+let circle_3;
+let circle_low;
 let circle25;
 let circle50;
 // Création hitbox
@@ -32,6 +36,12 @@ function preload() {
 
 // Création des éléments
 function create() {
+
+    game.scale.scaleMode = Phaser.ScaleManager.aspectRatio;
+    game.scale.pageAlignVertically = true;
+    game.scale.pageAlignHorizontally = true;
+    game.scale.setShowAll();
+    game.scale.refresh();
 
     //background
     game.add.sprite(0, 0, 'background').scale.setTo(0.32, 0.4);
@@ -100,4 +110,9 @@ function launch() {
 
     generator();
 
+}
+
+function update() {
+    game.scale.setShowAll();
+    game.scale.refresh();
 }

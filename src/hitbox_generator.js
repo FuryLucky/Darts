@@ -1,4 +1,5 @@
 let a = 0;
+let multi;
 
 function generator() {
 
@@ -37,18 +38,41 @@ function generator() {
         
     }
 
+    circle_2 = new Phaser.Circle(255, 230,274);
+    circle_high = new Phaser.Circle(255, 230,262);
+    circle_3 = new Phaser.Circle(255, 230,174);
+    circle_low = new Phaser.Circle(255, 230,162);
     circle25 = new Phaser.Circle(255, 230,24);
     circle50 = new Phaser.Circle(255, 230,14);
 
-    if (circle50.contains(flechette.body.x, flechette.body.y)){
+    if (circle50.contains(flechette.body.x, flechette.body.y)){ // Centre
         total.push(50);
         score.text = total;
     }
-    else if (circle25.contains(flechette.body.x, flechette.body.y)){
+    else if (circle25.contains(flechette.body.x, flechette.body.y)){ // Anneau 25
+
         total.push(25);
         score.text = total;
+
+    }else if (circle_low.contains(flechette.body.x, flechette.body.y)) { // Petit Anneau
+
+        total.push(multi);
+
+    }else if (circle_3.contains(flechette.body.x, flechette.body.y)) { // Multiplicateur *3
+
+        total.push(multi*3);
+
+    }else if (circle_high.contains(flechette.body.x, flechette.body.y)) { // Grand Anneau
+
+        total.push(multi);
+
+    }else if (circle_2.contains(flechette.body.x, flechette.body.y)) { // Multiplicateur *2
+
+        total.push(multi*2);
+
     }
-    
+
+    score.text = total;
 
 }
 
@@ -56,8 +80,8 @@ function detector(i) {
 
     if (poly.contains(flechette.body.x, flechette.body.y))
     {
-        total.push(values[i]);
-        score.text = total;
+        multi = values[i];
+        
     }
 
     graphics.clear();
@@ -79,6 +103,7 @@ function refresh() {
 
     dragInit();
 
+    multi = 1;
     a = 0;
 }
 
