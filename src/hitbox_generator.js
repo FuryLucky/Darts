@@ -76,9 +76,6 @@ function generator() {
     }
 
     score.setText(total);
-    // score.addColor('rgba(255,0,0,1)', 1);
-    // score.setText('\n');
-
 
 }
 

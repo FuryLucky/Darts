@@ -2,7 +2,7 @@
 // ...Dimensions du Canvas
 // ... ...Nom du niveau
 // ... ... ...Function de bases
-let game = new Phaser.Game(690, 440, Phaser.CANVAS, 'Arrow', { preload: preload, create: create, update: update, render: render});
+let game = new Phaser.Game(690, 440, Phaser.CANVAS, 'Arrow', { preload: preload, create: create, update: update});
 
 // Création des outils de jeu
 let flechette;
@@ -95,10 +95,6 @@ function take(select) {
 
 function dragInit() {
 
-    // //Repositionnement 
-    // flechette.scale.setTo(0.3, 0.3);
-    // flechette.angle = 90;
-
     // Rend le Drag possible
     flechette.inputEnabled = true;
     flechette.input.enableDrag();
@@ -108,7 +104,7 @@ function dragInit() {
 function startDrag() {
     flechette.body.moves = false;
     // Agrandissement de la fléchette pour un effet smooth
-    flechette.scale.setTo(0.4, 0.4);
+    flechette.scale.setTo(0.7, 0.7);
     flechette.angle = 100;
 
 }
@@ -133,9 +129,4 @@ function update() {
     // Responsive
     game.scale.setShowAll();
     game.scale.refresh();
-}
-
-function render() {
-    // game.debug.geom( circle50, 'rgba(255,255,0,0.3)' ) ;
-    // game.debug.body(flechette);
 }
