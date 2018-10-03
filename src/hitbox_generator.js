@@ -16,11 +16,11 @@ function generator() {
         poly.setTo([ 
             // Point A
             new Phaser.Point(point_a[i],point_a[y]), 
-            //Point B
+            // Point B
             new Phaser.Point(point_b[i],point_b[y]), 
-            //Point C
+            // Point C
             new Phaser.Point(point_c[i],point_c[y]), 
-            //Point D
+            // Point D
             new Phaser.Point(point_d[i],point_d[y])
         ]);
 
@@ -38,14 +38,15 @@ function generator() {
         
     }
 
-    circle_2 = new Phaser.Circle(255, 230,274);
-    circle_high = new Phaser.Circle(255, 230,262);
-    circle_3 = new Phaser.Circle(255, 230,174);
-    circle_low = new Phaser.Circle(255, 230,162);
-    circle25 = new Phaser.Circle(255, 230,24);
-    circle50 = new Phaser.Circle(255, 230,14);
+    circle_2    = new Phaser.Circle(236, 172, 218);
+    circle_high = new Phaser.Circle(236, 172, 198);
+    circle_3    = new Phaser.Circle(236, 172, 140);
+    circle_low  = new Phaser.Circle(236, 172, 121);
+    circle25    = new Phaser.Circle(236, 172, 20 );
+    circle50    = new Phaser.Circle(236, 172, 10 );
 
     if (circle50.contains(flechette.body.x, flechette.body.y)){ // Centre
+
         total.push(50);
         score.text = total;
     }
@@ -70,12 +71,18 @@ function generator() {
 
         total.push(multi*2);
 
+    }else{
+        total.push(0);
     }
 
-    score.text = total;
+    score.setText(total);
+    // score.addColor('rgba(255,0,0,1)', 1);
+    // score.setText('\n');
+
 
 }
 
+// Detecte qu'elles polygones est toucher
 function detector(i) {
 
     if (poly.contains(flechette.body.x, flechette.body.y))
@@ -95,13 +102,8 @@ function detector(i) {
     }, 1000);
 }
 
-// Pour relancer la flechette
+// Pour lancer les flechettes
 function refresh() {
-
-    flechette.x = 200;
-    flechette.y = 450;
-
-    dragInit();
 
     multi = 1;
     a = 0;
