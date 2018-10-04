@@ -47,35 +47,37 @@ function generator() {
 
     if (circle50.contains(flechette.body.x, flechette.body.y)){ // Centre
 
-        total.push(50);
-        score.text = total;
+        points.push(50);
+        score.text = points;
     }
     else if (circle25.contains(flechette.body.x, flechette.body.y)){ // Anneau 25
 
-        total.push(25);
-        score.text = total;
+        points.push(25);
+        score.text = points;
 
     }else if (circle_low.contains(flechette.body.x, flechette.body.y)) { // Petit Anneau
 
-        total.push(multi);
+        points.push(multi);
 
     }else if (circle_3.contains(flechette.body.x, flechette.body.y)) { // Multiplicateur *3
 
-        total.push(multi*3);
+        points.push(multi*3);
 
     }else if (circle_high.contains(flechette.body.x, flechette.body.y)) { // Grand Anneau
 
-        total.push(multi);
+        points.push(multi);
 
     }else if (circle_2.contains(flechette.body.x, flechette.body.y)) { // Multiplicateur *2
 
-        total.push(multi*2);
+        points.push(multi*2);
 
     }else{
-        total.push(0);
+        points.push(0);
     }
 
-    score.setText(total);
+    score.parseList(points);
+    points.push(' ');
+    score.y += 20;
 
 }
 
@@ -91,10 +93,10 @@ function detector(i) {
     graphics.clear();
 
     setTimeout(function() {
-        if (total.length < 5) {
+        if (points.length < 10) {
             refresh();
         }else{
-           restart(); 
+           end(); 
         }     
     }, 1000);
 }
@@ -107,9 +109,15 @@ function refresh() {
 }
 
 //Fin
-function restart() {
+function end() {
 
-    let max = total.reduce(function(a, b) { return a + b; }, 0);
-    score.text = max;
+    points.splice(1,1);
+    points.splice(2,1);
+    points.splice(3,1);
+    points.splice(4,1);
+    points.splice(5,1);
+
+    let max = points.reduce(function(a, b) { return a + b; }, 0);
+    somme.text = max;
 
 }

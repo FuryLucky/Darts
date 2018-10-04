@@ -24,7 +24,8 @@ let point_c = [237, 161, 240, 163, 243, 164, 245, 166, 246, 170, 247, 174, 246, 
 let point_d = [235, 161, 238, 162, 241, 162, 244, 164, 246, 167, 247, 170, 247, 173, 245, 177, 244, 180, 241, 182, 237, 183, 234, 183, 231, 181, 228, 179, 226, 177, 225, 173, 225, 170, 226, 166, 228, 164, 231, 161];
 // Score
 let score;
-let total = [];
+let points = [];
+let total = 0;
 
 // Chargement des images
 function preload() {
@@ -70,8 +71,10 @@ function create() {
     flechette_5.events.onInputDown.add(take, this);
 
     //Score
-    let style = { font: 'bold 20pt Arial', fill: '#990000', align: 'left', wordWrap: true, wordWrapWidth: 1 };
-    score = game.add.text(600, 146, total, style);
+    let style = { font: 'bold 20pt Arial', fill: '#990000', boundsAlignV: "center", align: 'left', wordWrap: true, wordWrapWidth: 1 };
+    score = game.add.text(600, 126, points, style);
+    somme = game.add.text(590, 330, total, style);
+    // score.setTextBounds(0, 0, width, height)
     score.anchor.setTo(0.5, 0.5);
 
 }
@@ -102,6 +105,7 @@ function dragInit() {
 }
 
 function startDrag() {
+
     flechette.body.moves = false;
     // Agrandissement de la fléchette pour un effet smooth
     flechette.scale.setTo(0.7, 0.7);
@@ -110,23 +114,26 @@ function startDrag() {
 }
 
 function stopDrag() {
+
     flechette.body.moves = true;
-    // Effet de fléchette qui s'éloigne
-    flechette.scale.setTo(0.2, 0.2);
     // Effet de lancer smooth
     flechette.angle = 80;
     // On retire la possibilité de saisir la fléchette
     flechette.inputEnabled = false;
 
+    // Effet de fléchette qui s'éloigne
+    game.add.tween(flechette).to( { x: '+7', y: '-17' }, 500, Phaser.Easing.Linear.None, true);
+    game.add.tween(flechette.scale).to( { x: '-0.4', y: '-0.4' }, 500, Phaser.Easing.Linear.None, true);
+
     setTimeout(function() {
         generator();
-    }, 100);
+    }, 500);
 
 }
 
 function update() {
 
     // Responsive
-    game.scale.setShowAll();
+    // game.scale.setShowAll();
     game.scale.refresh();
 }
