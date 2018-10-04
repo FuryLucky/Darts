@@ -26,11 +26,16 @@ let point_d = [235, 161, 238, 162, 241, 162, 244, 164, 246, 167, 247, 170, 247, 
 let score;
 let points = [];
 let total = 0;
+// Bouton
+let refr;
+let cross;
 
 // Chargement des images
 function preload() {
     game.load.image('background', '../assets/back.jpg');
     game.load.image('darts', '../assets/darts.png');
+    game.load.image('cross', '../assets/cross.png');
+    game.load.image('refresh', '../assets/refresh.png');
 }
 
 // Création des éléments
@@ -74,8 +79,13 @@ function create() {
     let style = { font: 'bold 20pt Arial', fill: '#990000', boundsAlignV: "center", align: 'left', wordWrap: true, wordWrapWidth: 1 };
     score = game.add.text(600, 126, points, style);
     somme = game.add.text(590, 330, total, style);
-    // score.setTextBounds(0, 0, width, height)
     score.anchor.setTo(0.5, 0.5);
+
+    //Bouton
+    refr = game.add.button(500, 0, 'refresh', reload, this);
+    refr.scale.setTo(0.14, 0.14);
+    cross = game.add.button(620, 10, 'cross', close, this);
+    cross.scale.setTo(0.2, 0.2);
 
 }
 
@@ -87,7 +97,7 @@ function take(select) {
     game.physics.enable(flechette, Phaser.Physics.ARCADE);
 
     // Définition des HitBox
-    flechette.body.setSize(3, 3, -3, -3);
+    flechette.body.setSize(5, 5, -3, -3);
 
     dragInit();
 
@@ -136,4 +146,13 @@ function update() {
     // Responsive
     // game.scale.setShowAll();
     game.scale.refresh();
+}
+
+//Relancer la page
+function reload () {
+    location.reload();
+}
+//Ferme la page
+function close() {
+    window.close();
 }

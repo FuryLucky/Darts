@@ -98,7 +98,7 @@ function detector(i) {
         }else{
            end(); 
         }     
-    }, 1000);
+    }, 100);
 }
 
 // Pour lancer les flechettes
